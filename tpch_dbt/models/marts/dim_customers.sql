@@ -6,16 +6,16 @@ final as (
     select
         -- keys
         customer_id as customer_key,
-        {# nation_id, #}
-        {# region_id, #}
+       nation_id,
+       region_id,
 
         -- attributes
         customer_name,
         customer_address,
         customer_phone,
         customer_market_segment,
-        {# nation_name, #}
-        {# region_name, #}
+        nation_name, 
+        region_name,
 
         -- financials
         customer_account_balance,

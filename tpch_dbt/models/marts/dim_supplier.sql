@@ -6,15 +6,15 @@ final as (
     select
         -- keys
         supplier_id,
-        {# nation_id,
-        region_id, #}
+        nation_id,
+        region_id, 
 
         -- attributes
         supplier_name,
         supplier_address,
         supplier_phone,
-        {# nation_name,
-        region_name, #}
+        nation_name,
+        region_name, 
 
         -- financials
         supplier_account_balance,
