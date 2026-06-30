@@ -1,0 +1,21 @@
+
+  
+  create view "tpch"."stg"."stg_tpch__part__dbt_tmp" as (
+    with source as (
+    select 
+        *
+    from "tpch"."main"."part"
+)
+
+select
+    p_partkey as part_id,
+    p_name as name,
+    p_mfgr as manufacturer,
+    p_brand as brand,
+    p_type as type,
+    p_size as size,
+    p_container as container,
+    p_retailprice as retail_price,
+    p_comment as comment
+from source
+  );

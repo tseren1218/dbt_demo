@@ -1,0 +1,116 @@
+[0m19:21:48.724041 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10693f200>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109613830>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1096134a0>]}
+
+
+============================== 19:21:48.726695 | c767df69-a2b7-4682-9634-57eb5a26854a ==============================
+[0m19:21:48.726695 [info ] [MainThread]: Running with dbt=1.11.11
+[0m19:21:48.726928 [debug] [MainThread]: running dbt with arguments {'invocation_command': 'dbt debug', 'write_json': 'True', 'empty': 'None', 'cache_selected_only': 'False', 'partial_parse': 'True', 'debug': 'False', 'version_check': 'True', 'no_print': 'None', 'profiles_dir': '/Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_duckdb', 'quiet': 'False', 'send_anonymous_usage_stats': 'True', 'static_parser': 'True', 'log_path': '/Users/tserendorj/Documents/Novelsoft/dbt-demo/logs', 'use_colors': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'warn_error': 'None', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_format': 'default', 'log_cache_events': 'False', 'printer_width': '80', 'introspect': 'True', 'target_path': 'None', 'fail_fast': 'False'}
+[0m19:21:48.745626 [info ] [MainThread]: dbt version: 1.11.11
+[0m19:21:48.745826 [info ] [MainThread]: python version: 3.12.7
+[0m19:21:48.745931 [info ] [MainThread]: python path: /Users/tserendorj/Documents/dbt-duckdb/venv/bin/python3.12
+[0m19:21:48.746025 [info ] [MainThread]: os info: macOS-15.5-arm64-arm-64bit
+[0m19:21:48.747840 [info ] [MainThread]: Using profiles dir at /Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_duckdb
+[0m19:21:48.747948 [info ] [MainThread]: Using profiles.yml file at /Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_duckdb/profiles.yml
+[0m19:21:48.748038 [info ] [MainThread]: Using dbt_project.yml file at /Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_project.yml
+[0m19:21:48.781678 [info ] [MainThread]: Configuration:
+[0m19:21:48.781885 [info ] [MainThread]:   profiles.yml file [[31mERROR invalid[0m]
+[0m19:21:48.782009 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m19:21:48.782106 [info ] [MainThread]: Required dependencies:
+[0m19:21:48.782660 [debug] [MainThread]: Executing "git --help"
+[0m19:21:48.799517 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--super-prefix=<path>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m19:21:48.799941 [debug] [MainThread]: STDERR: "b''"
+[0m19:21:48.800082 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m19:21:48.800195 [info ] [MainThread]: Connection test skipped since no profile was found
+[0m19:21:48.800299 [info ] [MainThread]: [31m1 check failed:[0m
+[0m19:21:48.800386 [info ] [MainThread]: Profile loading failed for the following reason:
+Runtime Error
+  Could not find profile named 'dbt_duckdb_demo'
+
+
+[0m19:21:48.802543 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 0.116062835, "process_in_blocks": "0", "process_kernel_time": 0.143253, "process_mem_max_rss": "111919104", "process_out_blocks": "0", "process_user_time": 0.522001}
+[0m19:21:48.802746 [debug] [MainThread]: Command `dbt debug` failed at 19:21:48.802707 after 0.12 seconds
+[0m19:21:48.802944 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104b9aae0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106dcda30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109610440>]}
+[0m19:21:48.803099 [debug] [MainThread]: Flushing usage events
+[0m19:21:50.119562 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m19:22:03.421379 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10386ddf0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1052bf920>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1052bf5c0>]}
+
+
+============================== 19:22:03.424109 | fc956ef8-dae6-467e-9e69-9f7423b20768 ==============================
+[0m19:22:03.424109 [info ] [MainThread]: Running with dbt=1.11.11
+[0m19:22:03.424351 [debug] [MainThread]: running dbt with arguments {'log_format': 'default', 'use_colors': 'True', 'static_parser': 'True', 'empty': 'None', 'no_print': 'None', 'target_path': 'None', 'write_json': 'True', 'invocation_command': 'dbt debug', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'debug': 'False', 'partial_parse': 'True', 'warn_error': 'None', 'send_anonymous_usage_stats': 'True', 'printer_width': '80', 'cache_selected_only': 'False', 'log_path': '/Users/tserendorj/Documents/Novelsoft/dbt-demo/logs', 'introspect': 'True', 'version_check': 'True', 'quiet': 'False', 'profiles_dir': '/Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_duckdb', 'fail_fast': 'False', 'log_cache_events': 'False'}
+[0m19:22:03.436991 [info ] [MainThread]: dbt version: 1.11.11
+[0m19:22:03.437172 [info ] [MainThread]: python version: 3.12.7
+[0m19:22:03.437274 [info ] [MainThread]: python path: /Users/tserendorj/Documents/dbt-duckdb/venv/bin/python3.12
+[0m19:22:03.437368 [info ] [MainThread]: os info: macOS-15.5-arm64-arm-64bit
+[0m19:22:03.439537 [info ] [MainThread]: Using profiles dir at /Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_duckdb
+[0m19:22:03.439647 [info ] [MainThread]: Using profiles.yml file at /Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_duckdb/profiles.yml
+[0m19:22:03.439745 [info ] [MainThread]: Using dbt_project.yml file at /Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_project.yml
+[0m19:22:03.474637 [info ] [MainThread]: Configuration:
+[0m19:22:03.474864 [info ] [MainThread]:   profiles.yml file [[31mERROR invalid[0m]
+[0m19:22:03.474996 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m19:22:03.475097 [info ] [MainThread]: Required dependencies:
+[0m19:22:03.475767 [debug] [MainThread]: Executing "git --help"
+[0m19:22:03.492896 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--super-prefix=<path>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m19:22:03.493278 [debug] [MainThread]: STDERR: "b''"
+[0m19:22:03.493403 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m19:22:03.493528 [info ] [MainThread]: Connection test skipped since no profile was found
+[0m19:22:03.493650 [info ] [MainThread]: [31m1 check failed:[0m
+[0m19:22:03.493740 [info ] [MainThread]: Profile loading failed for the following reason:
+Runtime Error
+  Could not find profile named 'dbt_duckdb_demo'
+
+
+[0m19:22:03.496080 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 0.11092896, "process_in_blocks": "0", "process_kernel_time": 0.141956, "process_mem_max_rss": "113442816", "process_out_blocks": "0", "process_user_time": 0.535215}
+[0m19:22:03.496430 [debug] [MainThread]: Command `dbt debug` failed at 19:22:03.496358 after 0.11 seconds
+[0m19:22:03.496692 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104bc6c30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105407710>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105360e30>]}
+[0m19:22:03.496887 [debug] [MainThread]: Flushing usage events
+[0m19:22:04.490861 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m19:22:38.107221 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1133f1b80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x114893920>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x114893590>]}
+
+
+============================== 19:22:38.109956 | 402c0e6d-c331-4eb7-898e-e9c52f8021f3 ==============================
+[0m19:22:38.109956 [info ] [MainThread]: Running with dbt=1.11.11
+[0m19:22:38.110196 [debug] [MainThread]: running dbt with arguments {'warn_error': 'None', 'profiles_dir': '/Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_duckdb', 'use_colors': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'log_format': 'default', 'introspect': 'True', 'write_json': 'True', 'target_path': 'None', 'quiet': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'version_check': 'True', 'printer_width': '80', 'debug': 'False', 'log_cache_events': 'False', 'send_anonymous_usage_stats': 'True', 'log_path': '/Users/tserendorj/Documents/Novelsoft/dbt-demo/logs', 'invocation_command': 'dbt debug', 'use_experimental_parser': 'False', 'partial_parse': 'True', 'indirect_selection': 'eager', 'static_parser': 'True', 'no_print': 'None'}
+[0m19:22:38.122912 [info ] [MainThread]: dbt version: 1.11.11
+[0m19:22:38.123097 [info ] [MainThread]: python version: 3.12.7
+[0m19:22:38.123205 [info ] [MainThread]: python path: /Users/tserendorj/Documents/dbt-duckdb/venv/bin/python3.12
+[0m19:22:38.123296 [info ] [MainThread]: os info: macOS-15.5-arm64-arm-64bit
+[0m19:22:38.125063 [info ] [MainThread]: Using profiles dir at /Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_duckdb
+[0m19:22:38.125184 [info ] [MainThread]: Using profiles.yml file at /Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_duckdb/profiles.yml
+[0m19:22:38.125281 [info ] [MainThread]: Using dbt_project.yml file at /Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_project.yml
+[0m19:22:38.159662 [info ] [MainThread]: Configuration:
+[0m19:22:38.159866 [info ] [MainThread]:   profiles.yml file [[31mERROR invalid[0m]
+[0m19:22:38.159988 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m19:22:38.160079 [info ] [MainThread]: Required dependencies:
+[0m19:22:38.160398 [debug] [MainThread]: Executing "git --help"
+[0m19:22:38.175182 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--super-prefix=<path>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m19:22:38.175505 [debug] [MainThread]: STDERR: "b''"
+[0m19:22:38.175618 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m19:22:38.175731 [info ] [MainThread]: Connection test skipped since no profile was found
+[0m19:22:38.175832 [info ] [MainThread]: [31m1 check failed:[0m
+[0m19:22:38.175923 [info ] [MainThread]: Profile loading failed for the following reason:
+Runtime Error
+  Could not find profile named 'dbt_duckdb_demo'
+
+
+[0m19:22:38.178115 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 0.10807396, "process_in_blocks": "0", "process_kernel_time": 0.144346, "process_mem_max_rss": "112656384", "process_out_blocks": "0", "process_user_time": 0.529741}
+[0m19:22:38.178406 [debug] [MainThread]: Command `dbt debug` failed at 19:22:38.178357 after 0.11 seconds
+[0m19:22:38.178632 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x114893710>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1148caf90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x114877860>]}
+[0m19:22:38.178806 [debug] [MainThread]: Flushing usage events
+[0m19:22:39.394246 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m19:34:48.955438 [debug] [MainThread]: Got an exception trying to initialize tracking
+
+
+============================== 19:34:48.981755 | af99a4c4-70f1-46c0-8031-f6ebb76bdf74 ==============================
+[0m19:34:48.981755 [info ] [MainThread]: Running with dbt=1.11.11
+[0m19:34:48.982245 [debug] [MainThread]: running dbt with arguments {'quiet': 'False', 'invocation_command': 'dbt run --select int_customers -f', 'fail_fast': 'False', 'warn_error': 'None', 'log_path': 'logs', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'no_print': 'None', 'partial_parse': 'True', 'target_path': 'None', 'debug': 'False', 'use_colors': 'True', 'profiles_dir': '/Users/tserendorj/.dbt', 'empty': 'False', 'static_parser': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'use_experimental_parser': 'False', 'send_anonymous_usage_stats': 'True', 'indirect_selection': 'eager', 'write_json': 'True', 'introspect': 'True', 'printer_width': '80', 'log_cache_events': 'False'}
+[0m19:34:48.982559 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /Users/tserendorj/Documents/Novelsoft/dbt-demo/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m19:34:48.985633 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.07046662, "process_in_blocks": "0", "process_kernel_time": 0.256906, "process_mem_max_rss": "111919104", "process_out_blocks": "0", "process_user_time": 0.892828}
+[0m19:34:48.985882 [debug] [MainThread]: Command `dbt run` failed at 19:34:48.985838 after 0.07 seconds
+[0m19:34:48.986034 [debug] [MainThread]: Flushing usage events
