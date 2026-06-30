@@ -9,3 +9,4 @@ tpch_dbt/logs/
 tpch_dbt/data/
 tpch_dbt/target/
 tpch_dbt/dbt_packages/
+tpch_dbt/profiles.yml
