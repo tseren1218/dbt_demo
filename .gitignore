@@ -5,5 +5,7 @@ logs/
 venv/
 .DS_Store
 tpch_dbt/.DS_Store
-
-tpch_dbt/data
+tpch_dbt/logs/
+tpch_dbt/data/
+tpch_dbt/target/
+tpch_dbt/dbt_packages/
