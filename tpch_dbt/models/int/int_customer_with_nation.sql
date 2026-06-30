@@ -23,7 +23,7 @@ joined as (
         c.phone as customer_phone,
         c.account_balance as customer_account_balance,
         c.market_segment as customer_market_segment,
-        c.comment as customer_comment
+        c.comment as customer_comment,
 
         -- nation attributes
         n.nation_name,
@@ -32,8 +32,8 @@ joined as (
         r.region_name
 
     from customers c
-    {# join nations n on c.nation_id = n.nation_id
-    join regions r on n.region_id = r.region_id #}
+    join nations n on c.nation_id = n.nation_id
+    join regions r on n.region_id = r.region_id
 )
 
 select * from joined

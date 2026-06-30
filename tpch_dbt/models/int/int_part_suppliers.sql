@@ -32,8 +32,8 @@ joined as (
 
         -- supplier attributes (already has nation + region)
         s.supplier_name,
-        {# s.nation_name,
-        s.region_name, #}
+        s.nation_name,
+        s.region_name,
 
         -- derived
         ps.availqty * ps.supply_cost as inventory_value

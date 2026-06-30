@@ -22,7 +22,7 @@ joined as (
         s.address as supplier_address,
         s.phone as supplier_phone,
         s.account_balance as supplier_account_balance,
-        s.comment as supplier_comment
+        s.comment as supplier_comment,
 
         -- nation attributes
         n.nation_name,
