@@ -1,0 +1,9 @@
+
+target/
+dbt_packages/
+logs/
+venv/
+.DS_Store
+tpch_dbt/.DS_Store
+
+tpch_dbt/data
