@@ -12,3 +12,4 @@ sources:
       - name: partsupp
       - name: region
       - name: supplier
+      - name: country_iso_code
