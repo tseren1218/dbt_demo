@@ -1,0 +1,70 @@
+version: 2
+
+# Module 13.2 — Metrics & the Semantic Layer (MetricFlow).
+#
+# A *semantic model* describes a table in business terms — its entities (join
+# keys), dimensions (ways to slice), and measures (things to aggregate). You
+# define the aggregation logic ONCE here, then *metrics* reference measures so
+# every tool computes revenue the same way.
+#
+# Query them with MetricFlow, e.g.:
+#   mf query --metrics net_revenue --group-by metric_time__month
+semantic_models:
+  - name: revenue
+    description: "Order-grain revenue facts for the semantic layer."
+    model: ref('fact_revenue')
+    defaults:
+      agg_time_dimension: order_date
+
+    entities:
+      - name: order
+        type: primary
+        expr: order_id
+      - name: customer
+        type: foreign
+        expr: customer_id
+
+    dimensions:
+      - name: order_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: order_status
+        type: categorical
+
+    measures:
+      - name: total_net_revenue
+        description: "Sum of net revenue (after discount, before tax)."
+        agg: sum
+        expr: net_revenue
+      - name: total_orders
+        description: "Distinct count of orders."
+        agg: count_distinct
+        expr: order_id
+
+metrics:
+  - name: net_revenue
+    description: "Total net revenue across orders."
+    label: "Net Revenue"
+    type: simple
+    type_params:
+      measure: total_net_revenue
+
+  - name: order_count
+    description: "Number of distinct orders."
+    label: "Order Count"
+    type: simple
+    type_params:
+      measure: total_orders
+
+  # A derived metric is built from other metrics.
+  - name: avg_revenue_per_order
+    description: "Net revenue divided by order count."
+    label: "Avg Revenue per Order"
+    type: derived
+    type_params:
+      expr: net_revenue / nullif(order_count, 0)
+      metrics:
+        - name: net_revenue
+        - name: order_count
+        

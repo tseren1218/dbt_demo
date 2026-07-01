@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: metricflow_time_spine
+    description: "One row per day — the time spine MetricFlow uses to aggregate metrics over time."
+    config:
+      group: finance
+    time_spine:
+      standard_granularity_column: date_day
+    columns:
+      - name: date_day
+        description: "Calendar day."
+        granularity: day

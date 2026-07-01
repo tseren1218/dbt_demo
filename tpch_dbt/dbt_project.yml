@@ -23,21 +23,35 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 
+# Module 11 — Hooks & Operations.
+# on-run-start / on-run-end fire once at the beginning/end of every dbt
+# invocation (run, build, test...). Great for audit logging or setup SQL.
+on-run-start:
+  - "{{ log('🚀 Starting dbt run against target: ' ~ target.name, info=true) }}"
+on-run-end:
+  - "{{ log('✅ Finished dbt run — ' ~ (results | length) ~ ' nodes executed.', info=true) }}"
+
+
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
-
-# In this example config, we tell dbt to build all models in the example/
-# directory as views. These settings can be overridden in the individual model
-# files using the `{{ config(...) }}` macro.
 models:
   tpch_dbt:
-    # Config indicated by + and applies to all files under models/example/
     stg:
       +schema: stg
       +materialized: view
+      +group: staging          # Module 6.4 — ownership
+      # Module 6.2 — access levels: private = same-group only, protected =
+      # any model in THIS project (the default), public = other projects too.
+      # staging/int are 'protected' so marts can ref() them; 'private' would
+      # block those cross-group refs.
+      +access: protected
     int:
       +schema: int
       +materialized: ephemeral
+      +group: staging
+      +access: protected
     marts:
       +schema: marts
       +materialized: table
+      +group: finance          # Module 6.4 — owned by Analytics Engineering
+      +access: public          # Module 6.2 — marts are the public interface

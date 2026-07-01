@@ -1,0 +1,20 @@
+version: 2
+
+# Module 13.3 — Unit Tests (dbt v1.8+).
+# Unlike data tests (which run on real warehouse data), a unit test feeds
+# hand-written INPUT rows into a model and asserts the exact OUTPUT rows. It
+# validates your SQL *logic* — here, that dim_parts derives part_type_category
+# by taking the last word of `type`. Runs with `dbt test` (or `dbt build`).
+unit_tests:
+  - name: test_dim_parts_category_is_last_word
+    description: "part_type_category should be the final word of the type string."
+    model: dim_parts
+    given:
+      - input: ref('stg_tpch__part')
+        rows:
+          - {part_id: 1, name: 'bolt', manufacturer: 'M1', brand: 'B1', type: 'SMALL POLISHED STEEL', size: 10, container: 'BOX', retail_price: 5.00}
+          - {part_id: 2, name: 'nut',  manufacturer: 'M2', brand: 'B2', type: 'ECONOMY ANODIZED TIN',  size: 5,  container: 'BAG', retail_price: 3.00}
+    expect:
+      rows:
+        - {part_id: 1, name: 'bolt', manufacturer: 'M1', brand: 'B1', type: 'SMALL POLISHED STEEL', size: 10, container: 'BOX', retail_price: 5.00, part_type_category: 'STEEL'}
+        - {part_id: 2, name: 'nut',  manufacturer: 'M2', brand: 'B2', type: 'ECONOMY ANODIZED TIN',  size: 5,  container: 'BAG', retail_price: 3.00, part_type_category: 'TIN'}

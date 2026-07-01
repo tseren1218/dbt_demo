@@ -1,0 +1,22 @@
+version: 2
+
+# Module 13.1 — Exposures.
+# An exposure registers a *downstream* use of your data (a dashboard, report,
+# ML model, etc.). It doesn't build anything — it documents the dependency so
+# it shows up in the lineage graph and `dbt build -s +exposure:...` can test
+# everything a dashboard relies on before it ships.
+exposures:
+  - name: executive_revenue_dashboard
+    label: "Executive Revenue Dashboard"
+    type: dashboard          # dashboard | notebook | analysis | ml | application
+    maturity: high
+    url: https://bi.example.com/dashboards/revenue
+    description: >
+      Company-wide revenue & orders dashboard used by the leadership team.
+      Refreshes daily off the marts layer.
+    depends_on:
+      - ref('fact_revenue')
+      - ref('dim_customers')
+    owner:
+      name: Analytics Engineering
+      email: analytics@example.com

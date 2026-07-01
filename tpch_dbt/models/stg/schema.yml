@@ -1,18 +1,28 @@
 version: 2
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Module 4 — Testing:   not_null / unique / accepted_values / relationships,
+#                       custom generic test (not_before) and dbt-utils tests.
+# Module 5 — Docs:      column descriptions, some via {{ doc('...') }} blocks.
+# Module 6 — Contracts: stg_tpch__customer enforces a contract (types + keys).
+# ─────────────────────────────────────────────────────────────────────────────
+
 models:
   - name: stg_tpch__customer
-    description: Staging model for customer data
+    description: "Staging model for customer data — one row per customer."
     config:
       contract:
         enforced: true
     columns:
       - name: customer_id
         data_type: bigint
-        description: Unique identifier of the customer
+        description: "{{ doc('customer_id') }}"      # Module 5: doc block
         constraints:
           - type: not_null
           - type: primary_key
+        data_tests:                                   # Module 4: generic tests
+          - not_null
+          - unique
       - name: name
         data_type: varchar
         description: Name of the customer
@@ -22,28 +32,40 @@ models:
       - name: nation_id
         data_type: integer
         description: Foreign key to the nation table
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_tpch__nation')
+                field: nation_id
       - name: phone
         data_type: varchar
-        description: Phone number of the customer
+        description: "Phone number, digits only (cleaned via the clean_phone macro)."
       - name: account_balance
         data_type: decimal(15,2)
         description: Account balance of the customer
       - name: account_balance_currency
         data_type: varchar
-        description: Currency of the account balance
+        description: "{{ doc('account_balance_currency') }}"
       - name: market_segment
         data_type: varchar
         description: Market segment the customer belongs to
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['BUILDING', 'AUTOMOBILE', 'MACHINERY', 'HOUSEHOLD', 'FURNITURE']
       - name: comment
         data_type: varchar
         description: Additional comments about the customer
 
   - name: stg_tpch__orders
-    description: Staging model for order data
+    description: "Staging model for order data — one row per order."
     columns:
       - name: order_id
         description: Unique identifier of the order
         data_type: bigint
+        data_tests:
+          - not_null
+          - unique
       - name: customer_id
         description: Foreign key to the customer table
         data_type: bigint
@@ -53,8 +75,12 @@ models:
                 to: ref('stg_tpch__customer')
                 field: customer_id
       - name: order_status
-        description: Current status of the order
+        description: "{{ doc('order_status') }}"
         data_type: varchar
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['O', 'F', 'P']
       - name: total_price
         description: Total price of the order
         data_type: decimal
@@ -76,14 +102,44 @@ models:
 
   - name: stg_tpch__lineitem
     description: "One row per order line item, renamed from the raw TPC-H lineitem source."
+    data_tests:
+      # Module 4 — dbt-utils test: the grain is (order_id, line_number).
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - order_id
+              - line_number
     columns:
+      - name: order_id
+        description: "Foreign key to the order."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_tpch__orders')
+                field: order_id
+      - name: quantity
+        description: "Quantity ordered for this line item."
+        data_tests:
+          # Module 4 — dbt-utils test: enforce a sensible numeric range.
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                inclusive: false
+      - name: discount
+        description: "Discount fraction (0–1) applied to the line item."
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+                inclusive: true
       - name: receipt_date
         description: "Date the customer received the line item; cannot precede the ship date."
         data_tests:
-          # An item cannot be received before it was shipped.
+          # Custom generic test (tests/generic/not_before.sql).
           - not_before:
               arguments:
                 compare_column: ship_date
-
       - name: ship_date
         description: "Date the line item was shipped."

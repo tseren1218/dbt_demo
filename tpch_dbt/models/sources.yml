@@ -3,11 +3,24 @@ version: 2
 sources:
   - name: tpch
     schema: main
+    description: "Raw TPC-H benchmark tables loaded into DuckDB's `main` schema."
     tables:
       - name: customer
       - name: lineitem
       - name: nation
       - name: orders
+        # Module 3.1 — Source freshness.
+        # `dbt source freshness` compares now() against the newest value in
+        # `loaded_at_field` and warns/errors if the data is too old.
+        #   warn_after  -> yellow warning
+        #   error_after -> red failure
+        # NOTE: TPC-H is historical (1990s) data, so this source will always
+        # report STALE. That's expected here — in a real project loaded_at_field
+        # is an ingestion timestamp (e.g. _loaded_at) that updates each load.
+        loaded_at_field: o_orderdate
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 7, period: day}
       - name: part
       - name: partsupp
       - name: region

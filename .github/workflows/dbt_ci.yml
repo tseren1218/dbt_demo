@@ -1,0 +1,43 @@
+# Module 13.6 — CI/CD.
+# Runs on every pull request: install dbt, then validate the project. This is
+# the automated version of the Best-Practices checklist — nothing merges unless
+# dbt can parse, build, and test it.
+#
+# Slim CI: on real warehouses you defer to a stored "prod" manifest and only
+# rebuild what changed with `--select state:modified+` (see the commented step),
+# which makes CI fast on large projects.
+
+name: dbt CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tpch_dbt
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r ../requirements.txt
+
+      - name: Install dbt packages
+        run: dbt deps
+
+      # `dbt build` = run + test + seed + snapshot in DAG order. It needs the
+      # source tables to exist; in CI you'd seed them or point at a warehouse.
+      # For DuckDB you would restore/build the .duckdb file here first.
+      - name: Build & test
+        run: dbt build --profiles-dir .
+
+      # ── Slim CI (uncomment once a prod manifest is published) ───────────────
+      # - name: Build only what changed
+      #   run: dbt build --select state:modified+ --defer --state ./prod-manifest --profiles-dir .

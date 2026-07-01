@@ -1,0 +1,15 @@
+version: 2
+
+# Module 6.4 — Model Groups: declare team ownership. A model joins a group via
+# `+group:` (see dbt_project.yml). Combined with `access:`, groups let you say
+# "only models in group X may ref() this private model."
+groups:
+  - name: staging
+    owner:
+      name: Data Engineering
+      email: data-eng@example.com
+
+  - name: finance
+    owner:
+      name: Analytics Engineering
+      email: analytics@example.com

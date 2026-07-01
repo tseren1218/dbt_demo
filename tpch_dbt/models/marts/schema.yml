@@ -1,0 +1,68 @@
+version: 2
+
+# Marts layer — business-facing fact & dimension tables.
+# Governance (access/group) is set centrally in dbt_project.yml (Module 6).
+
+models:
+  - name: dim_customers
+    description: "Customer dimension enriched with nation & region."
+    columns:
+      - name: customer_key
+        description: "{{ doc('customer_id') }}"
+        data_tests:
+          - not_null
+          - unique
+
+  - name: dim_parts
+    description: "Part dimension with derived category."
+    columns:
+      - name: part_id
+        description: "Primary key of the part."
+        data_tests:
+          - not_null
+          - unique
+
+  - name: dim_supplier
+    description: "Supplier dimension enriched with nation & region."
+    columns:
+      - name: supplier_id
+        description: "Primary key of the supplier."
+        data_tests:
+          - not_null
+          - unique
+
+  - name: fact_orders
+    description: "One row per order line item, with measures and delivery flags."
+    columns:
+      - name: order_id
+        description: "Foreign key to the order (not unique on its own — grain is order line)."
+        data_tests:
+          - not_null
+      - name: customer_id
+        description: "Foreign key to dim_customers."
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_key
+
+  - name: fact_revenue
+    description: >
+      Revenue aggregated by order and shipping attributes. Grain is
+      (order_id, order_status, order_priority, ship_mode) — an order spans
+      multiple rows when its line items use different ship modes, so order_id
+      alone is NOT unique here.
+    data_tests:
+      # Test the real composite grain instead of a single-column unique.
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - order_id
+              - order_status
+              - order_priority
+              - ship_mode
+    columns:
+      - name: order_id
+        description: "Foreign key to the order (repeats across ship modes)."
+        data_tests:
+          - not_null
