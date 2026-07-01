@@ -2,7 +2,7 @@ tpch_dbt:
   outputs:
     dev:
       type: duckdb
-      path: '/Users/tserendorj/Documents/Novelsoft/dbt-demo/tpch_dbt/data/tpch.duckdb'
+      path: 'data/tpch.duckdb'
       schema: main
       threads: 4
   target: dev
