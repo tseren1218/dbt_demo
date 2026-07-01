@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: stg_tpch__customer
+    description: Staging model for customer data
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: customer_id
+        data_type: bigint
+        description: Unique identifier of the customer
+        constraints:
+          - type: not_null
+          - type: primary_key
+      - name: name
+        data_type: varchar
+        description: Name of the customer
+      - name: address
+        data_type: varchar
+        description: Address of the customer
+      - name: nation_id
+        data_type: integer
+        description: Foreign key to the nation table
+      - name: phone
+        data_type: varchar
+        description: Phone number of the customer
+      - name: account_balance
+        data_type: decimal(15,2)
+        description: Account balance of the customer
+      - name: account_balance_currency
+        data_type: varchar
+        description: Currency of the account balance
+      - name: market_segment
+        data_type: varchar
+        description: Market segment the customer belongs to
+      - name: comment
+        data_type: varchar
+        description: Additional comments about the customer
+
+  - name: stg_tpch__orders
+    description: Staging model for order data
+    columns:
+      - name: order_id
+        description: Unique identifier of the order
+        data_type: bigint
+      - name: customer_id
+        description: Foreign key to the customer table
+        data_type: bigint
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_tpch__customer')
+                field: customer_id
+      - name: order_status
+        description: Current status of the order
+        data_type: varchar
+      - name: total_price
+        description: Total price of the order
+        data_type: decimal
+      - name: order_date
+        description: Date when the order was placed
+        data_type: date
+      - name: order_priority
+        description: Priority level of the order
+        data_type: varchar
+      - name: clerk
+        description: Clerk who processed the order
+        data_type: varchar
+      - name: ship_priority
+        description: Shipping priority of the order
+        data_type: integer
+      - name: comment
+        description: Additional comments about the order
+        data_type: varchar
