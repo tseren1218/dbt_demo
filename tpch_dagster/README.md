@@ -39,17 +39,28 @@ under **Automation** (or set `default_status=RUNNING` in `schedules.py`).
 
 ## Environment
 
-Run everything with the **system `python3`** (`/Library/Frameworks/...`), which
-has `dagster`, `dagster-dbt`, `dbt-core`, and `dbt-duckdb` installed. dbt reads
-`../tpch_dbt/profiles.yml` (DuckDB) automatically because Dagster runs dbt from
-the project dir.
+Use the repo-root **`venv/`**, which now has the full stack — `dagster`,
+`dagster-dbt`, `dagster-webserver`, `dbt-core`, and `dbt-duckdb` (see the pinned
+`../requirements.txt`). dbt reads `../tpch_dbt/profiles.yml` (DuckDB)
+automatically because Dagster runs dbt from the project dir.
 
-> Note: the repo-root `venv/` has dbt but **not** Dagster — don't use it here.
+```bash
+source ../venv/bin/activate          # from tpch_dagster/
+# or, from repo root: source venv/bin/activate
+```
+
+To rebuild the environment from scratch:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
 ## Run
 
 ```bash
-cd tpch_dagster
+source ../venv/bin/activate
 dagster dev          # UI at http://localhost:3000
 ```
 
