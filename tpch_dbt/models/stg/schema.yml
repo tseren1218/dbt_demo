@@ -73,3 +73,17 @@ models:
       - name: comment
         description: Additional comments about the order
         data_type: varchar
+
+  - name: stg_tpch__lineitem
+    description: "One row per order line item, renamed from the raw TPC-H lineitem source."
+    columns:
+      - name: receipt_date
+        description: "Date the customer received the line item; cannot precede the ship date."
+        data_tests:
+          # An item cannot be received before it was shipped.
+          - not_before:
+              arguments:
+                compare_column: ship_date
+
+      - name: ship_date
+        description: "Date the line item was shipped."
