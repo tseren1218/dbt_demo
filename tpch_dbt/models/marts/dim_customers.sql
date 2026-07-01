@@ -1,3 +1,5 @@
+{{ config(tags=['daily']) }}
+
 with customers as (
     select * from {{ ref('int_customer_with_nation') }}
 ),

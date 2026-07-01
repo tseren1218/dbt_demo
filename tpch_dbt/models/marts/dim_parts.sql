@@ -1,3 +1,5 @@
+{{ config(tags=['daily']) }}
+
 with parts as (
     select * from {{ ref('stg_tpch__part') }}
 ),

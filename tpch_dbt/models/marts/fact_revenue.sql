@@ -1,3 +1,5 @@
+{{ config(tags=['hourly']) }}
+
 with order_items as (
     select * from {{ ref('int_order_items') }}
 ),

@@ -1,3 +1,5 @@
+{{ config(tags=['daily']) }}
+
 with suppliers as (
     select * from {{ ref('int_supplier_with_nation') }}
 ),

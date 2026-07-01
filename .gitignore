@@ -10,3 +10,21 @@ tpch_dbt/data/
 tpch_dbt/target/
 tpch_dbt/dbt_packages/
 tpch_dbt/profiles.yml
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Dagster
+.tmp_dagster_home_*/
+dagster_home/
+$DAGSTER_HOME/
+tpch_dagster/.dagster/
+tpch_dagster/storage/
+tpch_dagster/history/
+tpch_dagster/schedules/
+*.bak
